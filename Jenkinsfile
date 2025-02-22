@@ -45,7 +45,7 @@ pipeline {
                 docker {
                     image 'node:22.11.0-alpine3.20'
                     args '-u root'
-                    reuseNode true  // Correct placement
+                    reuseNode true // Reuse the node for the next stages
                 }
             }
 
@@ -55,7 +55,6 @@ pipeline {
                 '''
             }
         }
-
 
         stage('Deploy on vercel') {
             agent {
@@ -73,5 +72,8 @@ pipeline {
                 '''
             }
         }
+
+
+
     }
 }
