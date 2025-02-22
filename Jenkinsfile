@@ -24,7 +24,7 @@ pipeline {
                 docker {
                     image 'node:22.11.0-alpine3.20'
                     args '-u root'
-                    reuseNode true  // Correct placement
+                    reuseNode true
                 }
             }
 
@@ -45,12 +45,15 @@ pipeline {
                 docker {
                     image 'node:22.11.0-alpine3.20'
                     args '-u root'
-                    reuseNode true // Reuse the node for the next stages
+                    reuseNode true
                 }
             }
 
             steps {
                 sh '''
+                    echo "Installing test dependencies"
+                    npm install --only=dev
+                    echo "Running tests"
                     npm run test
                 '''
             }
@@ -61,10 +64,9 @@ pipeline {
                 docker {
                     image 'node:22.11.0-alpine3.20'
                     args '-u root'
-                    reuseNode true  // Correct placement
+                    reuseNode true
                 }
             }
-
 
             steps {
                 sh '''
@@ -72,8 +74,5 @@ pipeline {
                 '''
             }
         }
-
-
-
     }
 }
