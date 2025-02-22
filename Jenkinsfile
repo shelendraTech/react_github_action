@@ -2,7 +2,8 @@ pipeline {
     agent any 
 
     envirement {
-        MY_VAR = 'Hello World'
+        NODE_ENV = 'development'
+        VERCEL_TOKEN = credentials('VERCEL_TOKEN')
     }
     options {
         skipDefaultCheckout(true)
@@ -74,7 +75,7 @@ pipeline {
             steps {
                 sh '''
                     npm install -g vercel
-                    echo $MY_VAR
+                    vercel --prod --token=$VERCEL_TOKEN --confirm --name=react_github_action
                 '''
             }
         }
