@@ -1,7 +1,7 @@
 pipeline {
     agent any 
 
-    envirement {
+    environment {
         NODE_ENV = 'development'
         VERCEL_TOKEN = credentials('VERCEL_TOKEN')
     }
