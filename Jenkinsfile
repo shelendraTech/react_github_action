@@ -1,6 +1,9 @@
 pipeline {
     agent any 
 
+    envirement {
+        MY_VAR = 'Hello World'
+    }
     options {
         skipDefaultCheckout(true)
     }
@@ -71,6 +74,7 @@ pipeline {
             steps {
                 sh '''
                     npm install -g vercel
+                    echo $MY_VAR
                 '''
             }
         }
